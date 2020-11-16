@@ -1,6 +1,6 @@
 import axios from 'axios';
 export default class Weather {
-  APIKEY = '3f3e5ac78183639205fb9d0532713201';
+  APIKEY = '***';
   BASEURL = 'https://api.openweathermap.org/data/2.5/weather';
 
   getWeather = async (searchTerm) => {
