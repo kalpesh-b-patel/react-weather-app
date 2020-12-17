@@ -14,26 +14,28 @@ const SearchTerm = () => {
     setSearchTerm(event.target.value);
   };
 
-  const getWeather = async () => {
+  const getWeather = async (e) => {
+    e.preventDefault();
     setLoading(true);
-    setWeatherData(await weather.getWeather(searchTerm));
+    const result = await weather.getWeather(searchTerm);
+
+    if (result.success) {
+      setWeatherData(result.data);
+      setSearchTerm('');
+    } else {
+    }
     setLoading(false);
   };
 
   return (
-    <div className='search'>
+    <form className='search' onSubmit={getWeather}>
       <input type='text' value={searchTerm} onChange={onInputChange} />
-      <button type='button' onClick={getWeather} className='submit'>
-        Search
-      </button>
-      <br />
-
       {loading ? (
         <h1>Loading...</h1>
       ) : Object.keys(weatherData).length !== 0 ? (
         <WeatherCard weatherData={weatherData} />
       ) : null}
-    </div>
+    </form>
   );
 };
 
